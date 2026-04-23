@@ -25,4 +25,19 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+try
+{
+    var context = services.GetRequiredService<BikeShopContext>();
+    await context.Database.MigrateAsync();
+    await BikeShopContextSeed.SeedAsync(context);
+}
+catch (Exception ex)
+{
+    var logger = loggerFactory.CreateLogger<Program>();
+    logger.LogError(ex, "An error occurred while migrating or seeding the database.");
+}
+
 app.Run();
