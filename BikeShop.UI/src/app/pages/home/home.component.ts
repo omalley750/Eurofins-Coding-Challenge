@@ -9,14 +9,17 @@ import { Bike } from '../../models/bike.model';
 })
 export class HomeComponent implements OnInit {
   bikes: Bike[] = [];
-  favourites: string[] = [];
 
   constructor(private bikeService: BikeService) { }
 
   ngOnInit(): void {
     this.bikeService.getBikes().subscribe({
       next: (response) => {
-        this.bikes = response;
+        const storedFavourites: string[] = JSON.parse(localStorage.getItem('favouriteBikes') ?? '[]');
+        this.bikes = response.map(bike => ({
+          ...bike,
+          inFavourites: storedFavourites.includes(bike.reference)
+        }));
       },
       error: (error) => console.log('Error: ', error)
     });
@@ -37,8 +40,10 @@ export class HomeComponent implements OnInit {
     if (existingFavourites) {
       try {
         let parsedFavourites: string[] = JSON.parse(existingFavourites);
-        parsedFavourites.push(ref);
-        localStorage.setItem('favouriteBikes', JSON.stringify(parsedFavourites));
+        if (!parsedFavourites.includes(ref)) {
+          parsedFavourites.push(ref);
+          localStorage.setItem('favouriteBikes', JSON.stringify(parsedFavourites));
+        }
       } catch {
         throw new Error('Failed to parse favourites');
       }
