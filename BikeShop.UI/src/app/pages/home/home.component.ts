@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BikeService } from '../../bike.service';
+import { Bike } from '../../models/bike.model';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,13 @@ import { BikeService } from '../../bike.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  bikes: any[] = [];
+  bikes: Bike[] = [];
   favourites: string[] = [];
 
   constructor(private bikeService: BikeService) { }
 
   ngOnInit(): void {
-    this.bikeService.list().subscribe({
+    this.bikeService.getBikes().subscribe({
       next: (response) => {
         this.bikes = response;
       },
@@ -21,8 +22,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  markBikeAsFavourite(bikeList: any[], favouriteBikeRef: string) {
-    const bikeFound = bikeList.find((bike: any) => bike.ref === favouriteBikeRef);
+  markBikeAsFavourite(bikeList: Bike[], favouriteBikeRef: string) {
+    const bikeFound = bikeList.find((bike: Bike) => bike.reference === favouriteBikeRef);
     if (bikeFound) {
       bikeFound.inFavourites = true;
     }

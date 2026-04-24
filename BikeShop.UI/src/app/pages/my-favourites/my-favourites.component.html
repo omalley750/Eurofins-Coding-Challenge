@@ -9,7 +9,7 @@
         <div class="card-body pt-0">
           <div class="row">
             <div class="col-12 p-0 text-center">
-              <img src="{{bike.img_url}}" alt="{{bike.manufacturer}} {{bike.model}}"/>
+              <img src="{{bike.imageUrl}}" alt="{{bike.manufacturer}} {{bike.model}}"/>
             </div>
             <div class="col-12 my-3">
               <div class="numbers">
@@ -18,14 +18,14 @@
                 <p class="mb-0"><b>Model:</b> {{bike.model}}</p>
                 <p class="mb-0"><b>Category:</b> {{bike.category}}</p>
                 <p class="mb-0"><b>Colour:</b> {{bike.colour}}</p>
-                <p class="mb-0"><b>Weight:</b> {{bike.weight}}</p>
-                <p class="mb-0"><b>Price:</b> {{bike.price}}</p>
+                <p class="mb-0"><b>Weight:</b> {{bike.weight}}kg</p>
+                <p class="mb-0"><b>Price:</b> {{bike.price | currency:'EUR':'symbol':'1.2-2'}}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="card-footer">
-          <button type="button" class="btn btn-danger" (click)="removeFromFavourites(bike.ref)">
+          <button type="button" class="btn btn-danger" (click)="removeFromFavourites(bike.reference)">
             Remove from favourites
           </button>
         </div>

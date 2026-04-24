@@ -1,3 +1,4 @@
+import { Bike } from '../../models/bike.model';
 import { BikeService } from '../../bike.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,15 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-favourites.component.scss']
 })
 export class MyFavouritesComponent implements OnInit {
-  bikes: any[] = [];
-  favouriteBikes: any[] = [];
+  bikes: Bike[] = [];
+  favouriteBikes: Bike[] = [];
 
   constructor(private bikeService: BikeService) { }
 
   ngOnInit(): void {
     const storedFavourites = localStorage.getItem('favouriteBikes') ?? '[]';
 
-    this.bikeService.list().subscribe({
+    this.bikeService.getBikes().subscribe({
       next: (response) => {
         this.bikes = response;
         this.updateFavourites(storedFavourites);
@@ -38,8 +39,10 @@ export class MyFavouritesComponent implements OnInit {
 
     if (favouritesArray && favouritesArray.length) {
       favouritesArray.forEach((ref: string) => {
-        const bikeInfo = this.bikes.find((bike: any) => bike.ref === ref);
-        this.favouriteBikes.push(bikeInfo);
+        const bikeInfo = this.bikes.find((bike: Bike) => bike.reference === ref);
+        if (bikeInfo) {
+          this.favouriteBikes.push(bikeInfo);
+        }
       });
     }
   }
