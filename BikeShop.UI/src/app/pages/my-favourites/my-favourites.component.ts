@@ -46,4 +46,11 @@ export class MyFavouritesComponent implements OnInit {
       });
     }
   }
+
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    if (!img.src.includes('/assets/images/bikes/placeholder-bike.png')) {
+      img.src = '/assets/images/bikes/placeholder-bike.png';
+    }
+  }
 }

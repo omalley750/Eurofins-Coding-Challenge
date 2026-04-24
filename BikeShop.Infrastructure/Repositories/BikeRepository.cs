@@ -22,5 +22,20 @@ namespace BikeShop.Infrastructure.Repositories
         {
             return await _context.Bikes.AsNoTracking().ToListAsync();
         }
+
+        public async Task AddBikeAsync(Bike bike)
+        {
+            await _context.Bikes.AddAsync(bike);
+        }
+
+        public async Task<Bike?> GetBikeByReferenceAsync(Guid reference)
+        {
+            return await _context.Bikes.AsNoTracking().FirstOrDefaultAsync(b => b.Reference == reference);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

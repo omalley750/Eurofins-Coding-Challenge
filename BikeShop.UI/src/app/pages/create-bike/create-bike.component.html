@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <div class="jumbotron mb-3">
+    <h3>Create Bike</h3>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div class="card card-stats shadow-sm p-2">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Manufacturer</label>
+            <input type="text" class="form-control" formControlName="manufacturer" />
+            <div *ngIf="form.get('manufacturer')?.invalid && form.get('manufacturer')?.touched" class="text-danger small mt-1">
+              Manufacturer is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Model</label>
+            <input type="text" class="form-control" formControlName="model" />
+            <div *ngIf="form.get('model')?.invalid && form.get('model')?.touched" class="text-danger small mt-1">
+              Model is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-control" formControlName="category" />
+            <div *ngIf="form.get('category')?.invalid && form.get('category')?.touched" class="text-danger small mt-1">
+              Category is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Colour</label>
+            <input type="text" class="form-control" formControlName="colour" />
+            <div *ngIf="form.get('colour')?.invalid && form.get('colour')?.touched" class="text-danger small mt-1">
+              Colour is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Price (€)</label>
+            <input type="number" class="form-control" formControlName="price" step="0.01" min="0.01" />
+            <div *ngIf="form.get('price')?.invalid && form.get('price')?.touched" class="text-danger small mt-1">
+              Price must be greater than 0 with up to 2 decimal places.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Weight (kg)</label>
+            <input type="number" class="form-control" formControlName="weight" step="0.01" min="0.01" />
+            <div *ngIf="form.get('weight')?.invalid && form.get('weight')?.touched" class="text-danger small mt-1">
+              Weight must be greater than 0 with up to 2 decimal places.
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            <label class="form-label">Image URL</label>
+            <input type="text" class="form-control" formControlName="imageUrl" />
+            <div *ngIf="form.get('imageUrl')?.invalid && form.get('imageUrl')?.touched" class="text-danger small mt-1">
+              Enter a valid image URL (http/https) or local path starting with /assets/images/.
+            </div>
+          </div>
+        </div>
+        <div class="d-flex gap-3">
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Create Bike</button>
+          <button type="button" class="btn btn-secondary" routerLink="/home">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

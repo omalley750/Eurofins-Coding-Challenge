@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => 
+    options.SuppressAsyncSuffixInActionNames = false);
 builder.Services.AddDbContext<BikeShopContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IBikeRepository, BikeRepository>();

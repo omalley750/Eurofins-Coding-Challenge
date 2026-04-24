@@ -9,3 +9,13 @@ export interface Bike {
   imageUrl: string;
   inFavourites?: boolean;
 }
+
+export interface CreateBike {
+  manufacturer: string;
+  model: string;
+  category: string;
+  price: number;
+  colour: string;
+  weight: number;
+  imageUrl: string;
+}

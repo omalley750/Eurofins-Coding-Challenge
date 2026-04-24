@@ -9,7 +9,7 @@
         <div class="card-body pt-0">
           <div class="row">
             <div class="col-12 p-0 text-center">
-              <img src="{{bike.imageUrl}}" alt="{{bike.manufacturer}} {{bike.model}}"/>
+              <img src="{{bike.imageUrl}}" alt="{{bike.manufacturer}} {{bike.model}}" (error)="onImageError($event)" />
             </div>
             <div class="col-12 my-3">
               <div class="numbers">

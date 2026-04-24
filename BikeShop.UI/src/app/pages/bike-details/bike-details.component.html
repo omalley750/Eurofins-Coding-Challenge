@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="bike" class="card card-stats shadow-sm">
+        <div class="row g-0">
+            <div class="col-md-4 d-flex align-items-center justify-content-center p-4 bg-light">
+                <img [src]="bike.imageUrl" [alt]="bike.manufacturer + ' ' + bike.model" class="img-fluid rounded" (error)="onImageError($event)" />
+            </div>
+            <div class="col-md-8 d-flex flex-column ">
+                <div class="card-body flex-grow-1">
+                    <h3 class="card-title">{{ bike.manufacturer }} {{ bike.model }}</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-4">Category</div>
+                        <div class="col-sm-8">{{ bike.category }}</div>
+
+                        <div class="col-sm-4">Colour</div>
+                        <div class="col-sm-8">{{ bike.colour }}</div>
+
+                        <div class="col-sm-4">Weight</div>
+                        <div class="col-sm-8">{{ bike.weight }}kg</div>
+
+                        <div class="col-sm-4">Price</div>
+                        <div class="col-sm-8">{{ bike.price | currency:'EUR':'symbol':'1.2-2' }}</div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center gap-3">
+                    <button *ngIf="!inFavourites" class="btn btn-orange" (click)="addToFavourites()">
+                        Add to favourites
+                    </button>
+                    <p *ngIf="inFavourites" class="mb-0 d-flex align-items-center gap-1">
+                        <span class="star">&#9733;</span> In favourites
+                    </p>
+                    <button class="btn btn-secondary" routerLink="/home">
+                        Back to catalogue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
