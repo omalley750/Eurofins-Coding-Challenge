@@ -19,7 +19,7 @@ describe('MyFavouritesComponent', () => {
       }]
     });
 
-    MockBikesService.prototype.list = function() {
+    MockBikesService.prototype.getBikes = function() {
       return of(bikesResponse);
     }
 
@@ -42,7 +42,7 @@ describe('MyFavouritesComponent', () => {
 
   it('should handle error after calling bike service on method: ngOnInit', () => {
     spyOn(console, 'log');
-    MockBikesService.prototype.list = function() {
+    MockBikesService.prototype.getBikes = function() {
       return throwError(() => {return {message: 'Error occured'}});
     }
     component.ngOnInit();
@@ -83,23 +83,23 @@ describe('MyFavouritesComponent', () => {
     expect(component.favouriteBikes).toEqual([
       {
         "manufacturer": "Boardman",
-        "ref": "79204036-aa35-405b-8030-f1562d7a4f18",
+        "reference": "79204036-aa35-405b-8030-f1562d7a4f18",
         "model": "HYB 8.8",
         "category": "Hybrid Electric Bike",
-        "price": "€1,020.00",
+        "price": 1020.00,
         "colour": "Blue",
-        "weight": "17.5kg",
-        "img_url": "/assets/images/bikes/Boardman-HYB-8.png"
+        "weight": 17.5,
+        "imageUrl": "/assets/images/bikes/Boardman-HYB-8.png"
       },
       {
         "manufacturer": "Boardman",
-        "ref": "91d0a29b-f352-47a1-a2b7-1b21f4e8d187",
+        "reference": "91d0a29b-f352-47a1-a2b7-1b21f4e8d187",
         "model": "MHT 8.6",
         "category": "Mountain Bike",
-        "price": "€760.00",
+        "price": 760.00,
         "colour": "Red",
-        "weight": "13.5kg",
-        "img_url": "/assets/images/bikes/Boardman-MHT-8.png"
+        "weight": 13.5,
+        "imageUrl": "/assets/images/bikes/Boardman-MHT-8.png"
       }
     ]);
   });

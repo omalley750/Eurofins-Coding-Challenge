@@ -20,7 +20,7 @@ describe('HomeComponent', () => {
       imports: [HttpClientModule]
     });
 
-    MockBikesService.prototype.list = function() {
+    MockBikesService.prototype.getBikes = function() {
       return of(bikesResponse);
     }
 
@@ -38,7 +38,7 @@ describe('HomeComponent', () => {
 
   it('should handle error after calling bike service on method: ngOnInit', () => {
     spyOn(console, 'log');
-    MockBikesService.prototype.list = function() {
+    MockBikesService.prototype.getBikes = function() {
       return throwError(() => {return {message: 'Error occured'}});
     }
     component.ngOnInit();
@@ -48,8 +48,8 @@ describe('HomeComponent', () => {
 
   it('should mark a bike as favorite', () => {
     component.ngOnInit();
-    component.markBikeAsFavourite(bikesResponse, '07e9548b-f35e-4e00-99d7-e49b5fb08907');
-    const bikeFound = component.bikes.find((bike) => bike.ref === '07e9548b-f35e-4e00-99d7-e49b5fb08907') || component.bikes[0];
+    component.markBikeAsFavourite(component.bikes, '07e9548b-f35e-4e00-99d7-e49b5fb08907');
+    const bikeFound = component.bikes.find((bike) => bike.reference === '07e9548b-f35e-4e00-99d7-e49b5fb08907') || component.bikes[0];
     expect(bikeFound.inFavourites).toBe(true);
   });
 

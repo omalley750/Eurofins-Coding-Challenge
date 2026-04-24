@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ItemComponent } from './item.component';
+import { RouterModule } from '@angular/router';
 
 export const mockBike = {
   "manufacturer": "Carrera",
-  "ref": "07e9548b-f35e-4e00-99d7-e49b5fb08907",
+  "reference": "07e9548b-f35e-4e00-99d7-e49b5fb08907",
   "model": "Karkinos",
   "category": "Mountain Bike",
-  "price": "€415.00",
+  "price": 415.00,
   "colour": "Red",
-  "weight": "14kg",
-  "img_url": "/assets/images/bikes/Carrera-Karkinos-Mountain-Bike.png"
+  "weight": 14,
+  "imageUrl": "/assets/images/bikes/Carrera-Karkinos-Mountain-Bike.png"
 }
 
 describe('ItemComponent', () => {
@@ -19,7 +20,8 @@ describe('ItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ItemComponent ]
+      declarations: [ ItemComponent ],
+      imports: [RouterModule.forRoot([])]
     })
     .compileComponents();
 
